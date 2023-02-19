@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="MyFramework">
-  <test thread-count="5" name="MyFrameworkTest">
-    <classes>
-      <class name="TestCases.LoginPageTest"/>
-    </classes>
-  </test> <!-- MyFrameworkTest -->
+	<listeners>
+		<listener class-name="Listeners.MyListeners" />
+	</listeners>
+	<test thread-count="5" name="MyFrameworkTest">
+		<classes>
+			<class name="TestCases.LoginPageTest" />
+		</classes>
+	</test> <!-- MyFrameworkTest -->
 </suite> <!-- MyFramework -->

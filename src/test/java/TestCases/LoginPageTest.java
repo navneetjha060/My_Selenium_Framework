@@ -2,7 +2,8 @@ package TestCases;
 
 import java.io.IOException;
 
-import org.testng.Assert;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,6 +22,8 @@ public class LoginPageTest extends BaseClass {
 	HomePage homepage;
 	ExtentReports extent;
 
+	static Logger Log = LogManager.getLogger(LoginPageTest.class);
+
 	public LoginPageTest() throws IOException {
 		super();
 
@@ -38,11 +41,13 @@ public class LoginPageTest extends BaseClass {
 	}
 
 	@Test(priority = 1)
-	public void loginPageTitleTest() {
+	public void loginPageTitleTest() throws InterruptedException {
 
+		Log.trace("TC-1 Started");
 		ExtentTest test = extent.createTest("TC-01", "This is Login Page Title Test");
 		String Title = Login.validateLoginPageTitle();
 		String Expected = "Free CRM - CRM software for customer relationship management, sales, and support.";
+
 		if (Title.equals(Expected)) {
 			test.pass("Test Case Passed Successfully");
 		}
@@ -55,6 +60,7 @@ public class LoginPageTest extends BaseClass {
 
 	@Test(priority = 2)
 	public void validateLogo() {
+		Log.trace("TC-2 Started");
 		ExtentTest test = extent.createTest("TC-02", "This is Logo Validation Test");
 		boolean res = Login.validateLogo();
 		if (res) {
@@ -67,9 +73,11 @@ public class LoginPageTest extends BaseClass {
 	}
 
 	@Test(priority = 3)
-	public void loginTest() throws IOException {
-
+	public void loginTest() throws IOException, InterruptedException {
+		Log.trace("TC-3 Started");
+		ExtentTest test = extent.createTest("TC-03", "This is Login Functionality Test");
 		homepage = Login.login(prop.getProperty("username"), prop.getProperty("password"));
+		test.pass("Test Case Passed Successfully");
 
 	}
 
